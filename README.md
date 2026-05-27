@@ -3,7 +3,7 @@
 [![Logo](https://files.catbox.moe/c5s9g0.jpg)](https://www.npmjs.com/package/@itsliaaa/baileys)
 
 <p align="center">
-   Enhanced Baileys v7 with fixed newsletter media upload, plus support for interactive messages, albums, and more message types.
+   Enhanced Baileys v7 with fixes for newsletter media uploads, plus support for interactive messages, albums, and additional message types.
    <br><br>
    <a href="https://www.npmjs.com/package/@itsliaaa/baileys">
       <img src="https://img.shields.io/npm/v/@itsliaaa/baileys?style=for-the-badge&logo=npm"/>
@@ -41,21 +41,26 @@ This fork designed for production use with a focus on clarity and safety:
 > 
 > Some npm packages are reuploading my fork under different names, with almost no meaningful changes:
 > 
-> - [@itsmelody](https://www.npmjs.com/package/@itsmelody/baileys)
-> - [@dnuzi](https://www.npmjs.com/package/@dnuzi/baileys)
-> - [@qadeerxtech](https://www.npmjs.com/package/@qadeerxtech/baileys)
+> - [@nuisockets](https://www.npmjs.com/package/@nuisockets/baileys)
+> - [@kaels](https://www.npmjs.com/package/@kaels/casileys)
+> - [@lumina-md](https://www.npmjs.com/package/@lumina-md/baileys)
 > 
 > They:
 > 
-> - Renamed my fork
+> - Renamed my fork under different package names
+> - Removed or ignored proper maintainer credit
 > - Added unnecessary overhead
-> - Rewrote all changelogs and note changes with their own names
-> - Claimed the modifications as their own work
+> - Rewrote changelogs and modification notes under their own names
+> - Claimed existing work and changes as if they made them
+> - Copied code directly from my fork with little to no meaningful modification
 > 
 > This is not acceptable.
 > 
-> To be clear, I am not the original author of Baileys (full respect to https://github.com/WhiskeySockets/Baileys).
-> This is about proper attribution and honesty in contributions.
+> To be clear, I am **NOT** the original maintainer of Baileys. full respect goes to https://github.com/WhiskeySockets/Baileys.
+>
+> **This issue is about attribution, honesty, and respecting open-source contributions.**
+>
+> Forking is completely fine. Removing credits and presenting someone else's work as your own is not.
 > 
 > Please report if necessary.
 > 
@@ -68,14 +73,14 @@ This fork designed for production use with a focus on clarity and safety:
 
 ### 🛠️ Internal Adjustments
 - 🖼️ Fixed an issue where media could not be sent to newsletters due to an upstream issue.
-- 📁 Reintroduced [`makeInMemoryStore`](#%EF%B8%8F-implementing-a-data-store) with a minimal ESM adaptation and small adjustments for Baileys v7.
+- 📁 Reintroduced [`makeInMemoryStore`](#%EF%B8%8F-implementing-data-store) with a minimal ESM adaptation and small adjustments for Baileys v7.
 - 📦 Switched FFmpeg execution from `exec` to `spawn` for safer process handling.
 - 🗃️ Added [`@napi-rs/image`](https://www.npmjs.com/package/@napi-rs/image) as a supported image processing backend in [`getImageProcessingLibrary()`](#%EF%B8%8F-image-processing), offering a balance between performance and compatibility.
 
 ### 📨 Messages Handling & Compatibility
 - 📩 Expanded messages support for:
    - 🖼️ [Album Message](#%EF%B8%8F-album-image--video)
-   - 👤 [Group Status Message](#4%EF%B8%8F⃣-group-status)
+   - 👤 [Group Status Message](#%E2%80%8D%E2%80%8D-group-status)
    - 👉🏻 [Interactive Message](#-sending-interactive-messages) (buttons, lists, native flows, templates, carousels).
    - 🎞️ [Status Mention Message](#%EF%B8%8F-status-mention)
    - 📦 [Sticker Pack Message](#-sticker-pack)
@@ -84,17 +89,17 @@ This fork designed for production use with a focus on clarity and safety:
    - [🌏 Message with Inline Entities](#-message-with-inline-entities) **[NEW]**
    - 📋 [Message with Table](#-message-with-table) **[NEW]**
    - 💳 [Payment-related Message](#-sending-payment-messages) (payment requests, invites, orders, invoices).
-- 📰 Simplified sending messages with ad thumbnail using [`externalAdReply`](#3%EF%B8%8F⃣-external-ad-reply), without requiring manual `contextInfo`.
+- 📰 Simplified sending messages with ad thumbnail using [`externalAdReply`](#-external-ad-reply), without requiring manual `contextInfo`.
 - 💭 Added support for quoting messages inside channel (newsletter). **[NEW]**
-- 🎀 Added support for [custom button icon](#3%EF%B8%8F⃣-interactive). **[NEW]**
+- 🎀 Added support for [custom button icon](#%EF%B8%8F-interactive). **[NEW]**
 
 ### 🧩 Additional Message Options
 - 👁️ Added optional boolean flags for message handling:  
-   - 🤖 [`ai`](#1%EF%B8%8F⃣-ai-icon) - AI icon on message
+   - 🤖 [`ai`](#-ai-icon) - AI icon on message
    - 📣 [`mentionAll`](#-mention) - Mention all group participants without requiring their JIDs in `mentions` or `mentionedJid` **[NEW]**
-   - 🔧 [`ephemeral`](#2%EF%B8%8F⃣-ephemeral), [`groupStatus`](#4%EF%B8%8F⃣-group-status), [`spoiler`](#-spoiler), [`viewOnce`](#7%EF%B8%8F⃣-view-once), [`viewOnceV2`](#8%EF%B8%8F⃣-view-once-v2), [`viewOnceV2Extension`](#9%EF%B8%8F⃣-view-once-v2-extension), [`interactiveAsTemplate`](#3%EF%B8%8F⃣-interactive) - Message wrappers
-   - 🔒 [`secureMetaServiceLabel`](#6%EF%B8%8F⃣-secure-meta-service-label) - Secure meta service label on message **[NEW]**
-   - 📄 [`raw`](#5%EF%B8%8F⃣-raw) - Build your message manually **(DO NOT USE FOR EXPLOITATION)**
+   - 🔧 [`ephemeral`](#-ephemeral), [`groupStatus`](#%E2%80%8D%E2%80%8D-group-status), [`isLottie`](#-lottie-sticker), [`spoiler`](#-spoiler), [`viewOnce`](#%EF%B8%8F-view-once), [`viewOnceV2`](#%EF%B8%8F-view-once-v2), [`viewOnceV2Extension`](#%EF%B8%8F-view-once-v2-extension), [`interactiveAsTemplate`](#%EF%B8%8F-interactive) - Message wrappers
+   - 🔒 [`secureMetaServiceLabel`](#%EF%B8%8F-secure-meta-service-label) - Secure meta service label on message **[NEW]**
+   - 📄 [`raw`](#-raw) - Build your message manually **(DO NOT USE FOR EXPLOITATION)**
 
 ### 📋 Table of Contents
 - [✨ Highlights](#-highlights)
@@ -112,6 +117,7 @@ This fork designed for production use with a focus on clarity and safety:
    - [🔔 Mention](#-mention)
    - [😁 Reaction](#-reaction)
    - [📌 Pin Message](#-pin-message)
+   - [🔖 Keep Chat](#-keep-chat)
    - [➡️ Forward Message](#%EF%B8%8F-forward-message)
    - [👤 Contact](#-contact)
    - [📍 Location](#-location)
@@ -134,26 +140,27 @@ This fork designed for production use with a focus on clarity and safety:
    - [🖼️ Album (Image & Video)](#%EF%B8%8F-album-image--video)
    - [📦 Sticker Pack](#-sticker-pack)
 - [👉🏻 Sending Interactive Messages](#-sending-interactive-messages)
-   - [1️⃣ Buttons](#1%EF%B8%8F⃣-buttons)
-   - [2️⃣ List](#2%EF%B8%8F⃣-list)
-   - [3️⃣ Interactive](#3%EF%B8%8F⃣-interactive)
-   - [4️⃣ Hydrated Template](#4%EF%B8%8F⃣-hydrated-template)
+   - [🔘 Buttons](#-buttons)
+   - [📋 List](#-list)
+   - [🗄️ Interactive](#%EF%B8%8F-interactive)
+   - [🫙 Hydrated Template](#-hydrated-template)
 - [💳 Sending Payment Messages](#-sending-payment-messages)
-   - [1️⃣ Invite Payment](#1%EF%B8%8F⃣-invite-payment)
-   - [2️⃣ Invoice](#2%EF%B8%8F⃣-invoice)
-   - [3️⃣ Order](#3%EF%B8%8F⃣-order)
-   - [4️⃣ Request Payment](#4%EF%B8%8F⃣-request-payment)
+   - [➕ Invite Payment](#-invite-payment)
+   - [🧾 Invoice](#-invoice)
+   - [🛍️ Order](#%EF%B8%8F-order)
+   - [💳 Request Payment](#-request-payment)
 - [👁️ Other Message Options](#%EF%B8%8F-other-message-options)
-   - [1️⃣ AI Icon](#1%EF%B8%8F⃣-ai-icon)
-   - [2️⃣ Ephemeral](#2%EF%B8%8F⃣-ephemeral)
-   - [3️⃣ External Ad Reply](#3%EF%B8%8F⃣-external-ad-reply)
-   - [4️⃣ Group Status](#4%EF%B8%8F⃣-group-status)
-   - [5️⃣ Raw](#5%EF%B8%8F⃣-raw)
-   - [6️⃣ Secure Meta Service Label](#6%EF%B8%8F⃣-secure-meta-service-label)
-   - [7️⃣ View Once](#7%EF%B8%8F⃣-view-once)
-   - [8️⃣ View Once V2](#8%EF%B8%8F⃣-view-once-v2)
-   - [9️⃣ View Once V2 Extension](#9%EF%B8%8F⃣-view-once-v2-extension)
-   - [🔟 Spoiler](#-spoiler)
+   - [🤖 AI Icon](#-ai-icon)
+   - [🕒 Ephemeral](#-ephemeral)
+   - [📰 External Ad Reply](#-external-ad-reply)
+   - [🧑‍🧑‍🧒 Group Status](#%E2%80%8D%E2%80%8D-group-status)
+   - [🐱 Lottie Sticker](#-lottie-sticker)
+   - [🧩 Raw](#-raw)
+   - [🏷️ Secure Meta Service Label](#%EF%B8%8F-secure-meta-service-label)
+   - [📑 Spoiler](#-spoiler)
+   - [👁️ View Once](#%EF%B8%8F-view-once)
+   - [👁️ View Once V2](#%EF%B8%8F-view-once-v2)
+   - [👁️ View Once V2 Extension](#%EF%B8%8F-view-once-v2-extension)
 - [♻️ Modify Messages](#%EF%B8%8F-modify-messages)
    - [🗑️ Delete Messages](#%EF%B8%8F-delete-messages)
    - [✏️ Edit Messages](#%EF%B8%8F-edit-messages)
@@ -267,7 +274,7 @@ connectToWhatsApp()
 #### 🔐 Auth State
 
 > [!NOTE]
-> You can use the experimental `useSingleFileAuthState` as an alternative to `useMultiFileAuthState`. However, `useSingleFileAuthState` already includes an internal caching mechanism, so there is no need to wrap `state.keys` with `makeCacheableSignalKeyStore`.
+> You can use the experimental `useSingleFileAuthState` and `useSqliteAuthState` as an alternative to `useMultiFileAuthState`. However, `useSingleFileAuthState` already includes an internal caching mechanism, so there is no need to wrap `state.keys` with `makeCacheableSignalKeyStore`.
 
 ### 🗄️ Implementing Data Store
 
@@ -414,7 +421,7 @@ sock.sendMessage(jid, {
       } // --- Additional metadata for large link preview
    },
    favicon: {
-      url: './path/to/tiny-image.png'
+      url: './path/to/tiny-image.ico'
    }
 })
 ```
@@ -447,8 +454,6 @@ sock.sendMessage(jid, {
       key: message.key,
       text: '✨'
    }
-}, {
-   quoted: message
 })
 ```
 
@@ -458,9 +463,19 @@ sock.sendMessage(jid, {
 sock.sendMessage(jid, {
    pin: message.key,
    time: 86400, // --- Set the value in seconds: 86400 (1d), 604800 (7d), or 2592000 (30d)
-   type: 1 // --- Or 0 to remove
-}, {
-   quoted: message
+   type: 1 // --- Or 2 to remove
+})
+```
+
+#### 🔖 Keep Chat
+
+> [!NOTE]
+> Keep Chat can only be used in chats or groups with disappearing messages enabled.
+
+```javascript
+sock.sendMessage(jid, {
+   keep: message.key,
+   type: 1 // --- Or 2 to remove
 })
 ```
 
@@ -591,7 +606,10 @@ sock.sendMessage(jid, {
       name: '🔥 Voting time',
       values: ['Yes', 'No'],
       selectableCount: 1,
-      toAnnouncementGroup: false
+      toAnnouncementGroup: false,
+      endDate: new Date(Date.now() + 28800000), // --- Optional
+      hideVoter: false, // --- Optional
+      canAddOption: false // --- Optional
    }
 }, {
    quoted: message
@@ -705,6 +723,7 @@ sock.sendMessage(jid, {
 
 ```javascript
 sock.sendMessage(jid, {
+   disclaimerText: 'RAW submessages structure example',
    richResponse: [{
       text: 'Example Usage',
    }, {
@@ -745,6 +764,7 @@ const language = 'javascript'
 const code = 'console.log("Hello, World!")'
 
 sock.sendMessage(jid, {
+   disclaimerText: 'Example of tokenizing Code Block',
    richResponse: [{
       text: 'Example Usage',
    }, {
@@ -763,6 +783,7 @@ sock.sendMessage(jid, {
 
 ```javascript
 sock.sendMessage(jid, {
+   disclaimerText: 'Code Block',
    headerText: '## Example Usage',
    contentText: '---',
    code: 'console.log("Hello, World!")',
@@ -775,6 +796,7 @@ sock.sendMessage(jid, {
 
 ```javascript
 sock.sendMessage(jid, {
+   disclaimerText: 'Inline Entities',
    headerText: '## Check Out!',
    contentText: '---',
    links: [{
@@ -798,6 +820,7 @@ sock.sendMessage(jid, {
 
 ```javascript
 sock.sendMessage(jid, {
+   disclaimerText: 'Table',
    headerText: '## Comparison between Node.js, Bun, and Deno',
    contentText: '---',
    title: 'Runtime Comparison',
@@ -954,7 +977,7 @@ sock.sendMessage(jid, {
 
 ### 👉🏻 Sending Interactive Messages
 
-#### 1️⃣ Buttons
+#### 🔘 Buttons
 
 ```javascript
 // --- Regular buttons message
@@ -1005,7 +1028,7 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 2️⃣ List
+#### 📋 List
 
 > [!NOTE]
 > It only works in private chat (`@s.whatsapp.net`).
@@ -1036,7 +1059,7 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 3️⃣ Interactive
+#### 🗄️ Interactive
 
 ```javascript
 // --- Native Flow
@@ -1167,7 +1190,7 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 4️⃣ Hydrated Template
+#### 🫙 Hydrated Template
 
 ```javascript
 sock.sendMessage(jid, {
@@ -1194,7 +1217,7 @@ sock.sendMessage(jid, {
 
 ### 💳 Sending Payment Messages
 
-#### 1️⃣ Invite Payment
+#### ➕ Invite Payment
 
 ```javascript
 sock.sendMessage(jid, {
@@ -1202,7 +1225,7 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 2️⃣ Invoice
+#### 🧾 Invoice
 
 > [!NOTE]
 > Invoice message are not supported yet.
@@ -1216,7 +1239,7 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 3️⃣ Order
+#### 🛍️ Order
 
 ```javascript
 sock.sendMessage(chat, {
@@ -1227,7 +1250,7 @@ sock.sendMessage(chat, {
 })
 ```
 
-#### 4️⃣ Request Payment
+#### 💳 Request Payment
 
 ```javascript
 sock.sendMessage(jid, {
@@ -1238,7 +1261,7 @@ sock.sendMessage(jid, {
 
 ### 👁️ Other Message Options
 
-#### 1️⃣ AI Icon
+#### 🤖 AI Icon
 
 > [!NOTE]
 > It only works in private chat (`@s.whatsapp.net`).
@@ -1255,7 +1278,7 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 2️⃣ Ephemeral
+#### 🕒 Ephemeral
 
 > [!NOTE]
 > Wrap message into `ephemeralMessage`
@@ -1270,7 +1293,7 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 3️⃣ External Ad Reply
+#### 📰 External Ad Reply
 
 > [!NOTE]
 > Add an ad thumbnail to messages (may not be displayed on some WhatsApp versions).
@@ -1290,7 +1313,7 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 4️⃣ Group Status
+#### 🧑‍🧑‍🧒 Group Status
 
 > [!NOTE]
 > It only works in group chat (`@g.us`)
@@ -1305,7 +1328,21 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 5️⃣ Raw
+#### 🐱 Lottie Sticker
+
+> [!NOTE]
+> Wrap message into `lottieStickerMessage`
+
+```javascript
+sock.sendMessage(jid, {
+   sticker: {
+      url: './path/to/sticker.webp'
+   },
+   isLottie: true
+})
+```
+
+#### 🧩 Raw
 
 ```javascript
 sock.sendMessage(jid, {
@@ -1327,7 +1364,7 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 6️⃣ Secure Meta Service Label
+#### 🏷️ Secure Meta Service Label
 
 ```javascript
 sock.sendMessage(jid, {
@@ -1336,7 +1373,22 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 7️⃣ View Once
+#### 📑 Spoiler
+
+> [!NOTE]
+> Wrap message into `spoilerMessage`
+
+```javascript
+sock.sendMessage(jid, {
+   image: {
+      url: './path/to/image.jpg'
+   },
+   caption: '❔ Spoiler',
+   spoiler: true
+})
+```
+
+#### 👁️ View Once
 
 > [!NOTE]
 > Wrap message into `viewOnceMessage`
@@ -1351,7 +1403,7 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 8️⃣ View Once V2
+#### 👁️ View Once V2
 
 > [!NOTE]
 > Wrap message into `viewOnceMessageV2`
@@ -1366,7 +1418,7 @@ sock.sendMessage(jid, {
 })
 ```
 
-#### 9️⃣ View Once V2 Extension
+#### 👁️ View Once V2 Extension
 
 > [!NOTE]
 > Wrap message into `viewOnceMessageV2Extension`
@@ -1378,21 +1430,6 @@ sock.sendMessage(jid, {
    },
    caption: '👁️ View Once V2 Extension',
    viewOnceV2Extension: true
-})
-```
-
-#### 🔟 Spoiler
-
-> [!NOTE]
-> Wrap message into `spoilerMessage`
-
-```javascript
-sock.sendMessage(jid, {
-   image: {
-      url: './path/to/image.jpg'
-   },
-   caption: '❔ Spoiler',
-   spoiler: true
 })
 ```
 
@@ -2011,8 +2048,6 @@ Perfect for managing groups, moderating chats, and adding fun with quiz games an
 This fork is based on [Baileys (GitHub)](https://github.com/WhiskeySockets/Baileys)
 
 ### 📣 Credits
-
-This project utilizes Protocol Buffer definitions maintained by [WPPConnect](https://github.com/wppconnect-team) through the [`wa-proto`](https://github.com/wppconnect-team/wa-proto) repository.
 
 Full credit is attributed to the original maintainers and contributors of Baileys:
 - [purpshell](https://github.com/purpshell)
